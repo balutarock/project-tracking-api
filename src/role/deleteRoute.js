@@ -1,4 +1,5 @@
 // import service
+import { createActivity } from "../activities/createActivity";
 import { roleService } from "./service";
 
 export default async (req, res, next) => {
@@ -12,7 +13,7 @@ export default async (req, res, next) => {
     try {
         //  Get Role Details
         const roleDetails = await roleService.findOne({
-            attributes: ["id"],
+            // attributes: ["id"],
             where: { id },
         });
 
@@ -27,6 +28,15 @@ export default async (req, res, next) => {
         // Success
         res.send({
             message: "Role deleted successfully",
+        });
+        res.on("finish", async () => {
+            createActivity(
+                req,
+                "Role",
+                "Deleted",
+                response.role_name,
+                response.id
+            );
         });
     } catch (err) {
         (err) => res.status(400).send({ message: err.message });

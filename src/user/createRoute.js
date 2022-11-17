@@ -1,3 +1,4 @@
+import { createActivity } from "../activities/createActivity";
 import { inviteUserByEmail } from "./invite";
 import { userService } from "./service";
 
@@ -23,7 +24,9 @@ export default async (req, res, next) => {
     };
 
     try {
-        await userService.create(createData);
+        await userService.create(createData).then((response) => {
+            createActivity(req, "User", "Invited", response.email, response.id);
+        });
 
         res.status(200).send({ message: "User Added Successfully" });
         inviteUserByEmail(req, res, createData);

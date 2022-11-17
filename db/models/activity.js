@@ -9,7 +9,7 @@ export default (sequelize, DataTypes) => {
             },
             name: DataTypes.STRING,
             notes: DataTypes.TEXT,
-            reference_id: DataTypes.STRING,
+            reference_id: DataTypes.INTEGER,
             createdBy: DataTypes.STRING,
         },
         {
@@ -17,6 +17,12 @@ export default (sequelize, DataTypes) => {
             paranoid: true,
         }
     );
+    activity.associate = function (models) {
+        activity.belongsTo(models.users, {
+            as: "userData",
+            foreignKey: "createdBy",
+        });
+    };
 
     return activity;
 };

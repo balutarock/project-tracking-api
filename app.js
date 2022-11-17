@@ -53,6 +53,6 @@ app.use(`/v1/settings`, settingsRoute);
 app.use(`/v1/customers`, customerRoute);
 
 //Activity Route
-app.use(`v1/activity`, activityRoute);
+app.use(`v1/activities`, activityRoute);
 
 export default app;

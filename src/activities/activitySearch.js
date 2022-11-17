@@ -1,8 +1,10 @@
 import { defaultDateFormat } from "../../common/utils";
 import { activityService } from "./service";
+import models from "../../db/models";
+
+const { users } = models;
 
 export default async (req, res, next) => {
-    console.log("req ------->", req);
     let { page, pageSize, search, sort, sortDir, pagination } = req.query;
     // Validate if page is not a number
     page = page ? parseInt(page, 10) : 1;
@@ -54,6 +56,12 @@ export default async (req, res, next) => {
         order: [[sortParam, sortDirParam]],
         where,
         attributes: { exclude: ["deletedAt"] },
+        include: [
+            {
+                model: users,
+                as: "userData",
+            },
+        ],
     };
 
     if (pagination) {
@@ -72,10 +80,15 @@ export default async (req, res, next) => {
             }
             const data = [];
             await results.rows.forEach(async (activityData) => {
-                console.log("activity data ---->", activityData);
                 data.push({
                     id: activityData.id,
                     name: activityData.name,
+                    ref_id: activityData.reference_id,
+                    user:
+                        activityData &&
+                        activityData.userData &&
+                        activityData.userData.first_name,
+                    notes: activityData.notes,
                     createdAt: defaultDateFormat(activityData.createdAt),
                     updatedAt: defaultDateFormat(activityData.updatedAt),
                 });

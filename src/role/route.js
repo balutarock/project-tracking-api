@@ -1,4 +1,5 @@
 import express from "express";
+import activitySearch from "../activities/activitySearch";
 import createRoute from "./createRoute";
 import deleteRoute from "./deleteRoute";
 import getRoleList from "./getRoleList";
@@ -15,5 +16,5 @@ roleRoute.get("/", verifyToken, getRoute);
 roleRoute.delete("/:id", verifyToken, deleteRoute);
 roleRoute.get("/roleList", verifyToken, getRoleList);
 roleRoute.put("/", verifyToken, updateRole);
-
+roleRoute.get("/activity/search/", verifyToken, activitySearch);
 export default roleRoute;

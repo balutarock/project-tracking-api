@@ -1,4 +1,5 @@
 import { baseUrl, reactAppBaseUrl } from "../../config";
+import createActivity from "../activities/createActivity";
 import { getRoleNameById } from "../role/service";
 import { SETTINGS_SENDGRID_API_KEY } from "../settings/Constant";
 import { getSystemSettingValue } from "../settings/service";
@@ -14,6 +15,7 @@ export const inviteUserByEmail = async (req, res, data) => {
         const signUpLink = `${reactAppBaseUrl}/sign-up/${token}&${email}&${data.role_id}`;
         const updateData = {
             token: token,
+            status: "invited",
         };
         await userService.update(updateData, {
             where: { email: email },

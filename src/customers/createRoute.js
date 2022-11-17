@@ -6,8 +6,10 @@ export default async (req, res, next) => {
         where: { email: data.email },
     });
 
-    if(isExist) {
-        return res.status(400).send({ message: "Customer Email Already Exists" });
+    if (isExist) {
+        return res
+            .status(400)
+            .send({ message: "Customer Email Already Exists" });
     }
     try {
         const createData = customerService.toDbObject(data);

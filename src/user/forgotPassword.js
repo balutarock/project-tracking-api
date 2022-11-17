@@ -11,6 +11,11 @@ export default async (req, res, next) => {
                 .status(400)
                 .send({ message: "Please enter registered email" });
         }
+        if (isUserExist && isUserExist.status == "invited") {
+            return res
+                .status(400)
+                .send({ message: "Please enter registered email" });
+        }
         try {
             const value = await userService.findOne({
                 where: {

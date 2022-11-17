@@ -11,6 +11,7 @@ export default (sequelize, DataTypes) => {
             last_name: DataTypes.STRING,
             email: DataTypes.STRING,
             password: DataTypes.STRING,
+            status: DataTypes.STRING,
             gender: DataTypes.STRING,
             phone_number: DataTypes.INTEGER,
             avatar: DataTypes.STRING,

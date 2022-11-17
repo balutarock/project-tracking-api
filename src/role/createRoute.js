@@ -1,11 +1,23 @@
 import { createActivity } from "../activities/createActivity";
+import { userService } from "../user/service";
 import { roleService } from "./service";
 
 export default async (req, res, next) => {
     const data = req.body;
-    const isExist = await roleService.findOne({
-        where: { role_name: data.role_name },
-    });
+    let isExist = false;
+    if (data) {
+        const value = await roleService.findAndCount();
+        let roleList = [];
+
+        value.rows.forEach((element) => {
+            if (element.role_name) {
+                roleList.push(element.role_name.toLowerCase().trim());
+                isExist = roleList.includes(
+                    data.role_name.toLowerCase().trim()
+                );
+            }
+        });
+    }
 
     if (isExist) {
         return res.status(400).send({ message: "Role Name Already Exists" });

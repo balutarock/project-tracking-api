@@ -20,7 +20,7 @@ export function up(queryInterface, Sequelize) {
             allowNull: true,
         },
         createdBy: {
-            type: Sequelize.STRING,
+            type: Sequelize.INTEGER,
             allowNull: true,
         },
         createdAt: {
