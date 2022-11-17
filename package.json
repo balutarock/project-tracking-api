@@ -1,0 +1,65 @@
+{
+  "name": "saasly-tracker-api",
+  "version": "1.0.0",
+  "description": "Saasly Tracker API",
+  "private": true,
+  "engines": {
+    "node": "16.15.1",
+    "npm": "8.11.0"
+  },
+  "dependencies": {
+    "@babel/core": "^7.17.2",
+    "@babel/eslint-parser": "^7.17.0",
+    "@babel/preset-env": "^7.16.11",
+    "@sendgrid/mail": "^7.7.0",
+    "async": "^3.2.3",
+    "aws-sdk": "^2.1253.0",
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.1",
+    "change-case": "^4.1.1",
+    "compression": "^1.7.4",
+    "connect-multiparty": "^2.2.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "debug": "^4.3.3",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.2",
+    "moment": "^2.29.1",
+    "moment-range": "^4.0.2",
+    "moment-timezone": "^0.5.34",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.15",
+    "pg": "^8.7.3",
+    "pg-hstore": "^2.3.4",
+    "prettier": "2.7.1",
+    "rimraf": "^3.0.2",
+    "sequelize": "4.37.7",
+    "sequelize-cli": "^6.2.0",
+    "slug": "8.2.2",
+    "ts-sequelize-models": "^1.2.2"
+  },
+  "devDependencies": {
+    "eslint": "8.27.0",
+    "eslint-config-prettier": "8.5.0",
+    "eslint-plugin-flowtype": "8.0.3",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "4.2.1",
+    "eslint-plugin-simple-import-sort": "8.0.0"
+  },
+  "cacheDirectories": [
+    "node_modules"
+  ],
+  "scripts": {
+    "start": "HTTPS=true npm run sequelize db:migrate && nodemon ./bin/www --exec babel-node",
+    "prod": "node ./dist/app.js",
+    "build": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./.nvmrc,./npm-debug.log --copy-files",
+    "create-model": "node ./bin/create-model.js",
+    "sequelize": "./node_modules/.bin/babel-node ./node_modules/.bin/sequelize $*",
+    "test": "npm run lint",
+    "lint": "echo ESLint: && ./node_modules/.bin/eslint -v && ./node_modules/.bin/eslint src --fix --ignore-path .gitignore"
+  }
+}
