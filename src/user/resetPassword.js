@@ -9,7 +9,6 @@ export default async (req, res, next) => {
         });
     }
     if (data && data.newPassword && data.confirmPassword) {
-        console.log("data new pass ---->", data.newPassword);
         try {
             const value = await userService.findOne({
                 where: {

@@ -1,5 +1,5 @@
 //Service
-import { customerService } from "./service";
+import { serverService } from "./service";
 
 // Common
 import { defaultDateFormat } from "../../common/utils";
@@ -13,41 +13,33 @@ export default async (req, res) => {
         where.id = id;
     }
 
-    customerService
+    serverService
         .findOne({
             where,
         })
-        .then((customerDetails) => {
-            if (!customerDetails) {
+        .then((serverDetails) => {
+            if (!serverDetails) {
                 return res.status(400).send({ message: "Customer not found" });
             }
 
             const {
                 id,
                 name,
-                email,
                 status,
-                primary_contact_name,
-                primary_contact_email,
-                primary_contact_phone,
-                secondary_contact_name,
-                secondary_contact_email,
-                secondary_contact_phone,
+                node_version,
+                server_root,
+                server_specification,
                 createdAt,
                 updatedAt,
-            } = customerDetails.get();
+            } = serverDetails.get();
 
             const data = {
                 id,
                 name,
-                email,
                 status,
-                primary_contact_name,
-                primary_contact_email,
-                primary_contact_phone,
-                secondary_contact_name,
-                secondary_contact_email,
-                secondary_contact_phone,
+                node_version,
+                server_root,
+                server_specification,
                 createdAt: defaultDateFormat(createdAt),
                 updatedAt: defaultDateFormat(updatedAt),
             };

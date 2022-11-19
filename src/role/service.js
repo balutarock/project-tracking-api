@@ -4,7 +4,6 @@ import DataBaseService from "../../common/DataBaseService";
 export const roleService = new DataBaseService(models.role);
 
 export const getRoleNameById = async (roleId) => {
-    console.log("roleId ---->", parseInt(roleId));
     const roleDetails = await roleService.findOne({
         where: { id: parseInt(roleId) },
     });

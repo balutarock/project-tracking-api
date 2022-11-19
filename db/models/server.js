@@ -8,6 +8,10 @@ export default (sequelize, DataTypes) => {
                 primaryKey: true,
             },
             name: DataTypes.STRING,
+            status: DataTypes.STRING,
+            node_version: DataTypes.STRING,
+            server_root: DataTypes.STRING,
+            server_specification: DataTypes.STRING,
         },
         {
             freezeTableName: true,

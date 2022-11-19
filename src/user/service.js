@@ -6,13 +6,11 @@ export const userService = new DataBaseService(models.users);
 const { users, role } = models;
 
 export const isUserExistsByEmail = async (email, callback) => {
-    console.log("email in function---->", email);
     await users
         .findAll({
             attributes: ["id", "email"],
         })
         .then(async (userList) => {
-            console.log("user list in function ---->", userList);
             let userEmail = "";
             await userList.forEach((userDetails) => {
                 if (
@@ -22,7 +20,6 @@ export const isUserExistsByEmail = async (email, callback) => {
                     userEmail = userDetails.email;
                 }
             });
-            console.log("user email in function --->", userEmail);
             if (userEmail) {
                 return callback(true, userEmail);
             } else {

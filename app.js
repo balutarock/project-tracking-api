@@ -13,6 +13,7 @@ import roleRoute from "./src/role/route";
 import settingsRoute from "./src/settings/route";
 import customerRoute from "./src/customers/route";
 import activityRoute from "./src/activities/route";
+import serverRoute from "./src/server/route";
 
 dotenv.config();
 
@@ -53,6 +54,9 @@ app.use(`/v1/settings`, settingsRoute);
 app.use(`/v1/customers`, customerRoute);
 
 //Activity Route
-app.use(`v1/activities`, activityRoute);
+app.use(`/v1/activities`, activityRoute);
+
+//Server Route
+app.use(`/v1/server`, serverRoute);
 
 export default app;

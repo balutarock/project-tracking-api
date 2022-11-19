@@ -109,7 +109,6 @@ const utils = (module.exports = {
      */
     getHashPassword: (password, callback) => {
         if (!password) {
-            console.log("enter function --->");
             return callback();
         }
 

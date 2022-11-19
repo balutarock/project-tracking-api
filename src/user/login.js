@@ -46,9 +46,6 @@ async function afterLoginSuccess(user, callback) {
  * @returns {*}
  */
 async function loginByPassword(email, password, callback) {
-    console.log("email ---->", email);
-    console.log("password ---->", password);
-
     // Validate if email is null
     if (!email) {
         return callback(new Error("Email is required"));
@@ -67,9 +64,6 @@ async function loginByPassword(email, password, callback) {
     }
 
     await isUserExistsByEmail(email, (isExists, userEmail) => {
-        console.log("email ----->", email);
-        console.log("isExists ----->", isExists);
-        console.log("userEmail ----->", userEmail);
         // Validate if user is not registered yet
         if (isExists != true) {
             return callback(new Error("Invalid email or password"), NOT_FOUND);
@@ -88,7 +82,6 @@ async function loginByPassword(email, password, callback) {
                 where: { email: userEmail },
             })
             .then(async (userDetails) => {
-                console.log("user details ---->", userDetails);
                 // Validate if user is not registered yet
                 if (!userDetails) {
                     return callback(

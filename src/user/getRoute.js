@@ -8,7 +8,6 @@ import { isInteger } from "../../common/validator";
 
 export default async (req, res) => {
     let { id } = req.params;
-    console.log("id ---->", id);
 
     const where = {};
     if (req.user && !id) {
