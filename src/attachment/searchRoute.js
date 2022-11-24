@@ -1,5 +1,5 @@
 import { defaultDateFormat } from "../../common/utils";
-import { customerService } from "./service";
+import { attachmentService } from "./service";
 
 export default async (req, res, next) => {
     let { page, pageSize, search, sort, sortDir, pagination } = req.query;
@@ -27,7 +27,7 @@ export default async (req, res, next) => {
     if (!Object.keys(sortableFields).includes(sortParam)) {
         return res
             .status(400)
-            .send({ message: `Unable to sort customer by ${sortParam}` });
+            .send({ message: `Unable to sort attachment by ${sortParam}` });
     }
 
     const sortDirParam = sortDir ? sortDir.toUpperCase() : "ASC";
@@ -62,7 +62,7 @@ export default async (req, res, next) => {
         }
     }
     // Get list and count
-    customerService
+    attachmentService
         .findAndCount(query)
         .then(async (results) => {
             // Return null
@@ -70,14 +70,15 @@ export default async (req, res, next) => {
                 return res.status(200).send(null);
             }
             const data = [];
-            await results.rows.forEach(async (customerData) => {
+            await results.rows.forEach(async (attachmentData) => {
                 data.push({
-                    id: customerData.id,
-                    name: customerData.name,
-                    email: customerData.email,
-                    status: customerData.status,
-                    createdAt: defaultDateFormat(customerData.createdAt),
-                    updatedAt: defaultDateFormat(customerData.updatedAt),
+                    id: attachmentData.id,
+                    appId: attachmentData.appId,
+                    name: attachmentData.name,
+                    type: attachmentData.type,
+                    link: attachmentData.link,
+                    createdAt: defaultDateFormat(attachmentData.createdAt),
+                    updatedAt: defaultDateFormat(attachmentData.updatedAt),
                 });
             });
             res.send({

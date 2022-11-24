@@ -14,6 +14,8 @@ import settingsRoute from "./src/settings/route";
 import customerRoute from "./src/customers/route";
 import activityRoute from "./src/activities/route";
 import serverRoute from "./src/server/route";
+import applicationRoute from "./src/application.js/route";
+import attachmentRoute from "./src/attachment/route";
 
 dotenv.config();
 
@@ -58,5 +60,11 @@ app.use(`/v1/activities`, activityRoute);
 
 //Server Route
 app.use(`/v1/server`, serverRoute);
+
+//Applications Route
+app.use(`/v1/application`, applicationRoute);
+
+//Attachments Route
+app.use(`/v1/attachment`, attachmentRoute);
 
 export default app;

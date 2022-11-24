@@ -1,5 +1,5 @@
 import { defaultDateFormat } from "../../common/utils";
-import { roleService } from "./service";
+import { serverService } from "./service";
 
 export default async (req, res, next) => {
     const query = {
@@ -7,7 +7,7 @@ export default async (req, res, next) => {
     };
 
     // Get list and count
-    roleService
+    serverService
         .findAndCount(query)
         .then(async (results) => {
             // Return null
@@ -15,13 +15,13 @@ export default async (req, res, next) => {
                 return res.status(200).send(null);
             }
             const data = [];
-            await results.rows.forEach(async (roleData) => {
+            await results.rows.forEach(async (serverData) => {
                 data.push({
-                    id: roleData.id,
-                    role_name: roleData.role_name,
-                    status: roleData.status,
-                    createdAt: defaultDateFormat(roleData.createdAt),
-                    updatedAt: defaultDateFormat(roleData.updatedAt),
+                    id: serverData.id,
+                    name: serverData.name,
+                    status: serverData.status,
+                    createdAt: defaultDateFormat(serverData.createdAt),
+                    updatedAt: defaultDateFormat(serverData.updatedAt),
                 });
             });
             res.send({

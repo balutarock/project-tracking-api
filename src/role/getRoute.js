@@ -19,7 +19,7 @@ export default async (req, res) => {
         .findOne({
             where,
         })
-        .then(roleDetails => {
+        .then((roleDetails) => {
             if (!roleDetails) {
                 return res.status(400).send({ message: "Role not found" });
             }
@@ -36,5 +36,5 @@ export default async (req, res) => {
 
             res.status(200).send(data);
         })
-        .catch(err => res.status(400).send({ message: err.message }));
+        .catch((err) => res.status(400).send({ message: err.message }));
 };
