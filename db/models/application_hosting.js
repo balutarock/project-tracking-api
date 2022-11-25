@@ -1,6 +1,6 @@
 export default (sequelize, DataTypes) => {
-    const application = sequelize.define(
-        "application",
+    const application_hosting = sequelize.define(
+        "application_hosting",
         {
             id: {
                 type: DataTypes.INTEGER,
@@ -24,5 +24,5 @@ export default (sequelize, DataTypes) => {
         }
     );
 
-    return application;
+    return application_hosting;
 };

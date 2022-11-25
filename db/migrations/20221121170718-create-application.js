@@ -1,6 +1,6 @@
 export function up(queryInterface, Sequelize) {
-    console.log("Creating application table");
-    return queryInterface.createTable("application", {
+    console.log("Creating application_hosting table");
+    return queryInterface.createTable("application_hosting", {
         id: {
             allowNull: false,
             autoIncrement: true,
@@ -62,6 +62,6 @@ export function up(queryInterface, Sequelize) {
     });
 }
 export function down(queryInterface, Sequelize) {
-    console.log("Dropping application table");
-    return queryInterface.dropTable("application");
+    console.log("Dropping application_hosting table");
+    return queryInterface.dropTable("application_hosting");
 }

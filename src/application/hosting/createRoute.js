@@ -1,10 +1,10 @@
-import { applicationService } from "./service";
+import { applicationHostingService } from "./service";
 
 export default async (req, res, next) => {
     const data = req.body;
     let isExist = false;
     if (data) {
-        const value = await applicationService.findAndCount();
+        const value = await applicationHostingService.findAndCount();
         let applicationList = [];
 
         value.rows.forEach((element) => {
@@ -23,8 +23,8 @@ export default async (req, res, next) => {
             .send({ message: "Application Name Already Exists" });
     }
     try {
-        const createData = applicationService.toDbObject(data);
-        await applicationService.create(createData);
+        const createData = applicationHostingService.toDbObject(data);
+        await applicationHostingService.create(createData);
         res.status(200).send({ message: "Application Created Successfully" });
     } catch (err) {
         res.status(400).send(err);

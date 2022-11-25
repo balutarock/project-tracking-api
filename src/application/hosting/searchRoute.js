@@ -1,5 +1,5 @@
-import { defaultDateFormat } from "../../common/utils";
-import { applicationService } from "./service";
+import { defaultDateFormat } from "../../../common/utils";
+import { applicationHostingService } from "./service";
 
 export default async (req, res, next) => {
     let { page, pageSize, search, sort, sortDir, pagination } = req.query;
@@ -62,7 +62,7 @@ export default async (req, res, next) => {
         }
     }
     // Get list and count
-    applicationService
+    applicationHostingService
         .findAndCount(query)
         .then(async (results) => {
             // Return null

@@ -1,9 +1,9 @@
 //Service
-import { applicationService } from "./service";
+import { applicationHostingService } from "./service";
 
 // Common
-import { defaultDateFormat } from "../../common/utils";
-import { isInteger } from "../../common/validator";
+import { defaultDateFormat } from "../../../common/utils";
+import { isInteger } from "../../../common/validator";
 
 export default async (req, res) => {
     let { id } = req.query;
@@ -15,7 +15,7 @@ export default async (req, res) => {
         where.id = id;
     }
 
-    applicationService
+    applicationHostingService
         .findOne({
             where,
         })
