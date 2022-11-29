@@ -1,5 +1,5 @@
-import { defaultDateFormat } from "../../common/utils";
-import { attachmentService } from "./service";
+import { defaultDateFormat } from "../../../common/utils";
+import { applicationSupportHoursService } from "./service";
 
 export default async (req, res, next) => {
     let { page, pageSize, search, sort, sortDir, pagination } = req.query;
@@ -27,7 +27,7 @@ export default async (req, res, next) => {
     if (!Object.keys(sortableFields).includes(sortParam)) {
         return res
             .status(400)
-            .send({ message: `Unable to sort attachment by ${sortParam}` });
+            .send({ message: `Unable to sort applications by ${sortParam}` });
     }
 
     const sortDirParam = sortDir ? sortDir.toUpperCase() : "ASC";
@@ -48,7 +48,7 @@ export default async (req, res, next) => {
             },
         ];
     }
-    where.appId = req.params.appId;
+
     const query = {
         order: [[sortParam, sortDirParam]],
         where,
@@ -62,7 +62,7 @@ export default async (req, res, next) => {
         }
     }
     // Get list and count
-    attachmentService
+    applicationSupportHoursService
         .findAndCount(query)
         .then(async (results) => {
             // Return null
@@ -70,15 +70,14 @@ export default async (req, res, next) => {
                 return res.status(200).send(null);
             }
             const data = [];
-            await results.rows.forEach(async (attachmentData) => {
+            await results.rows.forEach(async (applicationData) => {
                 data.push({
-                    id: attachmentData.id,
-                    appId: attachmentData.appId,
-                    name: attachmentData.name,
-                    type: attachmentData.type,
-                    link: attachmentData.link,
-                    createdAt: defaultDateFormat(attachmentData.createdAt),
-                    updatedAt: defaultDateFormat(attachmentData.updatedAt),
+                    id: applicationData.id,
+                    name: applicationData.name,
+                    type: applicationData.type,
+                    status: applicationData.status,
+                    createdAt: defaultDateFormat(applicationData.createdAt),
+                    updatedAt: defaultDateFormat(applicationData.updatedAt),
                 });
             });
             res.send({

@@ -4,6 +4,7 @@ export default async (req, res, next) => {
     const data = req.body;
     try {
         const createData = attachmentService.toDbObject(data);
+        createData.appId = data.appId;
         await attachmentService.create(createData);
         res.status(200).send({ message: "Attachment Created Successfully" });
     } catch (err) {

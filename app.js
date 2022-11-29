@@ -16,6 +16,8 @@ import activityRoute from "./src/activities/route";
 import serverRoute from "./src/server/route";
 import applicationHostingRoute from "./src/application/hosting/route";
 import attachmentRoute from "./src/attachment/route";
+import applicationSupportHoursRoute from "./src/application/supportHours/route";
+import applicationProductsRoute from "./src/application/products/route";
 
 dotenv.config();
 
@@ -61,8 +63,14 @@ app.use(`/v1/activities`, activityRoute);
 //Server Route
 app.use(`/v1/server`, serverRoute);
 
-//Applications Route
+//Applications Hosting Route
 app.use(`/v1/application/hosting`, applicationHostingRoute);
+
+//Applications Support Hours Route
+app.use(`/v1/application/supportHours`, applicationSupportHoursRoute);
+
+// Applications Products Route
+app.use(`/v1/application/products`, applicationProductsRoute);
 
 //Attachments Route
 app.use(`/v1/attachment`, attachmentRoute);

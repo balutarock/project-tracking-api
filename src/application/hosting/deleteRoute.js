@@ -1,32 +1,32 @@
 // import service
-import { customerService } from "./service";
+import { applicationHostingService } from "./service";
 
 export default async (req, res, next) => {
     const id = parseInt(req.params.id, 10);
 
     // Validate id
     if (!id) {
-        return res.status(400).send({ message: "Customer Id is required" });
+        return res.status(400).send({ message: "Application Id is required" });
     }
 
     try {
-        //  Get Customer Details
-        const customerDetails = await customerService.findOne({
+        //  Get Application Details
+        const customerDetails = await applicationHostingService.findOne({
             attributes: ["id"],
             where: { id },
         });
 
-        // Customer Not Found
+        // Application Not Found
         if (!customerDetails) {
-            return res.status(400).send({ message: "Customer not found" });
+            return res.status(400).send({ message: "Application not found" });
         }
 
-        // Delete The Customer Details
+        // Delete The Application Details
         await customerDetails.destroy();
 
         // Success
         res.send({
-            message: "Customer deleted successfully",
+            message: "Application deleted successfully",
         });
     } catch (err) {
         (err) => res.status(400).send({ message: err.message });
