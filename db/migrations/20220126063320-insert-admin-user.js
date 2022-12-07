@@ -8,7 +8,7 @@ module.exports = {
                 replacements: [config.defaultSuperAdminEmail],
                 type: queryInterface.sequelize.QueryTypes.SELECT,
             })
-            .then(users => {
+            .then((users) => {
                 if (Object.keys(users).length === 0) {
                     // Generate Hash Password
                     getHashPassword(

@@ -18,6 +18,7 @@ import applicationHostingRoute from "./src/application/hosting/route";
 import attachmentRoute from "./src/attachment/route";
 import applicationSupportHoursRoute from "./src/application/supportHours/route";
 import applicationProductsRoute from "./src/application/products/route";
+import userEmailRoute from "./src/userEmail/route";
 
 dotenv.config();
 
@@ -74,5 +75,8 @@ app.use(`/v1/application/products`, applicationProductsRoute);
 
 //Attachments Route
 app.use(`/v1/attachment`, attachmentRoute);
+
+//User Email Routs
+app.use(`/v1/userEmail`, userEmailRoute);
 
 export default app;
