@@ -6,3 +6,4 @@ export const SETTINGS_LINKEDIN_URL = "linkedin_url";
 export const SETTINGS_TWITTER_URL = "twitter_url";
 export const SETTINGS_YOUTUBE_URL = "youtube_url";
 export const SETTINGS_SENDGRID_API_KEY = "sendgrid_api_key";
+export const SETTINGS_FROM_EMAIL_ID = "settings_from_email_id";

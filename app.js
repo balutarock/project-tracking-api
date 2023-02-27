@@ -14,11 +14,12 @@ import settingsRoute from "./src/settings/route";
 import customerRoute from "./src/customers/route";
 import activityRoute from "./src/activities/route";
 import serverRoute from "./src/server/route";
-import applicationHostingRoute from "./src/application/hosting/route";
 import attachmentRoute from "./src/attachment/route";
-import applicationSupportHoursRoute from "./src/application/supportHours/route";
-import applicationProductsRoute from "./src/application/products/route";
 import userEmailRoute from "./src/userEmail/route";
+import reminderRoute from "./src/reminders/route";
+import applicationType from "./src/applicationType/route";
+import { scheduler } from "./src/reminderJob/reminder";
+import applicationRoute from "./src/application/route";
 
 dotenv.config();
 
@@ -64,19 +65,21 @@ app.use(`/v1/activities`, activityRoute);
 //Server Route
 app.use(`/v1/server`, serverRoute);
 
-//Applications Hosting Route
-app.use(`/v1/application/hosting`, applicationHostingRoute);
-
-//Applications Support Hours Route
-app.use(`/v1/application/supportHours`, applicationSupportHoursRoute);
-
-// Applications Products Route
-app.use(`/v1/application/products`, applicationProductsRoute);
+// Applications Route
+app.use(`/v1/applications`, applicationRoute);
 
 //Attachments Route
 app.use(`/v1/attachment`, attachmentRoute);
+
+//Reminders Route
+app.use(`/v1/reminder`, reminderRoute);
+
+//Application Type Route
+app.use(`/v1/applicationType`, applicationType);
 
 //User Email Routs
 app.use(`/v1/userEmail`, userEmailRoute);
 
 export default app;
+
+scheduler();

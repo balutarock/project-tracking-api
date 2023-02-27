@@ -1,9 +1,9 @@
 //Service
-import { applicationProductService } from "./service";
+import { reminderService } from "./service";
 
 // Common
-import { defaultDateFormat } from "../../../common/utils";
-import { isInteger } from "../../../common/validator";
+import { defaultDateFormat } from "../../common/utils";
+import { isInteger } from "../../common/validator";
 
 export default async (req, res) => {
     let { id } = req.query;
@@ -15,29 +15,25 @@ export default async (req, res) => {
         where.id = id;
     }
 
-    applicationProductService
+    reminderService
         .findOne({
             where,
         })
         .then((appDetails) => {
             if (!appDetails) {
-                return res
-                    .status(400)
-                    .send({ message: "Application not found" });
+                return res.status(400).send({ message: "Reminder not found" });
             }
 
             const {
                 id,
                 name,
                 status,
-                type,
-                started_at,
-                application_url,
-                due_date,
-                git_url,
-                port,
-                customer,
-                server,
+                appId,
+                subject,
+                description,
+                remind_at,
+                cc_email,
+                to_email,
                 createdAt,
                 updatedAt,
             } = appDetails.get();
@@ -46,14 +42,12 @@ export default async (req, res) => {
                 id,
                 name,
                 status,
-                type,
-                started_at,
-                application_url,
-                due_date,
-                git_url,
-                port,
-                customer,
-                server,
+                appId,
+                subject,
+                description,
+                remind_at,
+                cc_email,
+                to_email,
                 createdAt: defaultDateFormat(createdAt),
                 updatedAt: defaultDateFormat(updatedAt),
             };

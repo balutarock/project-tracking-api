@@ -1,9 +1,12 @@
 //Service
-import { applicationHostingService } from "./service";
+import { applicationService } from "./service";
 
 // Common
-import { defaultDateFormat } from "../../../common/utils";
-import { isInteger } from "../../../common/validator";
+import { defaultDateFormat } from "../../common/utils";
+import { isInteger } from "../../common/validator";
+import model from "../../db/models";
+
+const { application_type } = model;
 
 export default async (req, res) => {
     let { id } = req.query;
@@ -15,9 +18,15 @@ export default async (req, res) => {
         where.id = id;
     }
 
-    applicationHostingService
+    applicationService
         .findOne({
             where,
+            include: [
+                {
+                    model: application_type,
+                    as: "applicationType",
+                },
+            ],
         })
         .then((appDetails) => {
             if (!appDetails) {
@@ -38,6 +47,10 @@ export default async (req, res) => {
                 port,
                 customer,
                 server,
+                applicationType,
+                total_hour,
+                spent_hour,
+                remaining_hour,
                 createdAt,
                 updatedAt,
             } = appDetails.get();
@@ -54,6 +67,10 @@ export default async (req, res) => {
                 port,
                 customer,
                 server,
+                total_hour,
+                spent_hour,
+                remaining_hour,
+                applicationType,
                 createdAt: defaultDateFormat(createdAt),
                 updatedAt: defaultDateFormat(updatedAt),
             };

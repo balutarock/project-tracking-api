@@ -1,10 +1,10 @@
-import { applicationSupportHoursService } from "./service";
-
+import { applicationService } from "./service";
+import { createActivity } from "../activities/createActivity";
 export default async (req, res, next) => {
     const data = req.body;
     let isExist = false;
     if (data) {
-        const value = await applicationSupportHoursService.findAndCount();
+        const value = await applicationService.findAndCount();
         let applicationList = [];
 
         value.rows.forEach((element) => {
@@ -23,8 +23,16 @@ export default async (req, res, next) => {
             .send({ message: "Application Name Already Exists" });
     }
     try {
-        const createData = applicationSupportHoursService.toDbObject(data);
-        await applicationSupportHoursService.create(createData);
+        const createData = applicationService.toDbObject(data);
+        await applicationService.create(createData).then((response) => {
+            createActivity(
+                req,
+                "Application",
+                "Created",
+                response.name,
+                response.id
+            );
+        });
         res.status(200).send({ message: "Application Created Successfully" });
     } catch (err) {
         res.status(400).send(err);

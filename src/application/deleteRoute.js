@@ -1,5 +1,5 @@
 // import service
-import { applicationSupportHoursService } from "./service";
+import { applicationService } from "./service";
 
 export default async (req, res, next) => {
     const id = parseInt(req.params.id, 10);
@@ -11,7 +11,7 @@ export default async (req, res, next) => {
 
     try {
         //  Get Application Details
-        const customerDetails = await applicationSupportHoursService.findOne({
+        const customerDetails = await applicationService.findOne({
             attributes: ["id"],
             where: { id },
         });

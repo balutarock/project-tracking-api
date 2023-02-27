@@ -1,5 +1,8 @@
-import { defaultDateFormat } from "../../../common/utils";
-import { applicationHostingService } from "./service";
+import { defaultDateFormat } from "../../common/utils";
+import { applicationService } from "./service";
+import model from "../../db/models";
+
+const { application_type } = model;
 
 export default async (req, res, next) => {
     let { page, pageSize, search, sort, sortDir, pagination } = req.query;
@@ -53,6 +56,12 @@ export default async (req, res, next) => {
         order: [[sortParam, sortDirParam]],
         where,
         attributes: { exclude: ["deletedAt"] },
+        include: [
+            {
+                model: application_type,
+                as: "applicationType",
+            },
+        ],
     };
 
     if (pagination) {
@@ -62,7 +71,7 @@ export default async (req, res, next) => {
         }
     }
     // Get list and count
-    applicationHostingService
+    applicationService
         .findAndCount(query)
         .then(async (results) => {
             // Return null
@@ -74,7 +83,8 @@ export default async (req, res, next) => {
                 data.push({
                     id: applicationData.id,
                     name: applicationData.name,
-                    type: applicationData.type,
+                    type: applicationData.applicationType.name,
+                    typeId: applicationData.applicationType.id,
                     status: applicationData.status,
                     createdAt: defaultDateFormat(applicationData.createdAt),
                     updatedAt: defaultDateFormat(applicationData.updatedAt),

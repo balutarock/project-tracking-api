@@ -1,5 +1,5 @@
-import { defaultDateFormat } from "../../../common/utils";
-import { applicationProductService } from "./service";
+import { defaultDateFormat } from "../../common/utils";
+import { reminderService } from "./service";
 
 export default async (req, res, next) => {
     let { page, pageSize, search, sort, sortDir, pagination } = req.query;
@@ -27,7 +27,7 @@ export default async (req, res, next) => {
     if (!Object.keys(sortableFields).includes(sortParam)) {
         return res
             .status(400)
-            .send({ message: `Unable to sort applications by ${sortParam}` });
+            .send({ message: `Unable to sort reminders by ${sortParam}` });
     }
 
     const sortDirParam = sortDir ? sortDir.toUpperCase() : "ASC";
@@ -48,7 +48,7 @@ export default async (req, res, next) => {
             },
         ];
     }
-
+    where.appId = req.params.appId;
     const query = {
         order: [[sortParam, sortDirParam]],
         where,
@@ -62,7 +62,7 @@ export default async (req, res, next) => {
         }
     }
     // Get list and count
-    applicationProductService
+    reminderService
         .findAndCount(query)
         .then(async (results) => {
             // Return null
@@ -70,14 +70,20 @@ export default async (req, res, next) => {
                 return res.status(200).send(null);
             }
             const data = [];
-            await results.rows.forEach(async (applicationData) => {
+            await results.rows.forEach(async (reminderData) => {
                 data.push({
-                    id: applicationData.id,
-                    name: applicationData.name,
-                    type: applicationData.type,
-                    status: applicationData.status,
-                    createdAt: defaultDateFormat(applicationData.createdAt),
-                    updatedAt: defaultDateFormat(applicationData.updatedAt),
+                    id: reminderData.id,
+                    appId: reminderData.appId,
+                    name: reminderData.name,
+                    status: reminderData.status,
+                    link: reminderData.link,
+                    subject: reminderData.subject,
+                    description: reminderData.description,
+                    remind_at: defaultDateFormat(reminderData.remind_at),
+                    cc_email: reminderData.cc_email,
+                    to_email: reminderData.to_email,
+                    createdAt: defaultDateFormat(reminderData.createdAt),
+                    updatedAt: defaultDateFormat(reminderData.updatedAt),
                 });
             });
             res.send({

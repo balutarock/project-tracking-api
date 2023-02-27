@@ -9,7 +9,6 @@ export const createActivity = async (req, activity, type, name, ref_id) => {
         };
         await activityService.create(createData);
     } catch (error) {
-        console.log("error in creating activity ->", error);
         return error;
     }
 };

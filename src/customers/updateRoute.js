@@ -13,7 +13,6 @@ export default async (req, res, next) => {
         const updateData = customerService.toDbObject(data);
         await customerService.update(updateData, { where: { id: customerId } });
 
-        console.log("data ----->", data);
         const customerData = {
             email: data.email && data.email,
             name: data.name && data.name,

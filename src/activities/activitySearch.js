@@ -25,7 +25,7 @@ export default async (req, res, next) => {
         updatedAt: "updatedAt",
     };
 
-    const sortParam = sort || "name";
+    const sortParam = sort || "createdAt";
     // Validate sortable fields is present in sort param
     if (!Object.keys(sortableFields).includes(sortParam)) {
         return res

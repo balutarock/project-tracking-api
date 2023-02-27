@@ -2,15 +2,12 @@ import models from "../../db/models";
 const { user_email } = models;
 
 export const createUserEmail = async (req, res, data) => {
-    console.log("req ----->", req);
-    console.log("data ----->", data);
     const isExist = await user_email.findOne({
         where: { email: data.email },
     });
 
     try {
         if (!isExist) {
-            console.log("not exist ----->", data.email);
             const userData = {
                 email: data.email,
                 name: data.name,

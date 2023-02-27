@@ -1,5 +1,6 @@
 import { customerService } from "./service";
 import { createUserEmail } from "../userEmail/createUserEmail";
+import { createActivity } from "../activities/createActivity";
 
 export default async (req, res, next) => {
     const data = req.body;
@@ -13,7 +14,15 @@ export default async (req, res, next) => {
             .send({ message: "Customer Email Already Exists" });
     }
     try {
-        const createData = customerService.toDbObject(data);
+        const createData = customerService.toDbObject(data).then((response) => {
+            createActivity(
+                req,
+                "Customer",
+                "Created",
+                response.name,
+                response.id
+            );
+        });
         await customerService.create(createData);
         const customerUsers = {
             email: createData.email,
