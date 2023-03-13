@@ -1,6 +1,6 @@
 export default (sequelize, DataTypes) => {
-    const reminder = sequelize.define(
-        "reminder",
+    const workflow = sequelize.define(
+        "workflow",
         {
             id: {
                 type: DataTypes.INTEGER,
@@ -9,13 +9,8 @@ export default (sequelize, DataTypes) => {
             },
             name: DataTypes.STRING,
             status: DataTypes.STRING,
-            subject: DataTypes.STRING,
-            description: DataTypes.TEXT,
-            remind_at: DataTypes.STRING,
-            cc_email: DataTypes.STRING,
-            to_email: DataTypes.STRING,
-            appId: DataTypes.INTEGER,
-            send_slack_notification: DataTypes.STRING,
+            users: DataTypes.STRING,
+            workflow_for: DataTypes.STRING,
         },
         {
             freezeTableName: true,
@@ -23,5 +18,5 @@ export default (sequelize, DataTypes) => {
         }
     );
 
-    return reminder;
+    return workflow;
 };

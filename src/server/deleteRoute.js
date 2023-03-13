@@ -1,6 +1,8 @@
 // import service
 import { serverService } from "./service";
+import models from "../../db/models";
 
+const { application } = models;
 export default async (req, res, next) => {
     const id = parseInt(req.params.id, 10);
 
@@ -19,6 +21,15 @@ export default async (req, res, next) => {
         // Server Not Found
         if (!serverDetails) {
             return res.status(400).send({ message: "Server not found" });
+        }
+        const isApplicationExist = await application.findOne({
+            where: { customer: serverDetails.dataValues.id },
+            attributes: { exclude: ["deletedAt"] },
+        });
+        if (isApplicationExist) {
+            return res.status(400).send({
+                message: "Server is associated with applications",
+            });
         }
 
         // Delete The Server Details

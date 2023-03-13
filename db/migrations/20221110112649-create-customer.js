@@ -15,6 +15,30 @@ export function up(queryInterface, Sequelize) {
             type: Sequelize.STRING,
             allowNull: true,
         },
+        primary_contact_name: {
+            type: Sequelize.STRING,
+            allowNull: true,
+        },
+        primary_contact_email: {
+            type: Sequelize.STRING,
+            allowNull: true,
+        },
+        primary_contact_phone: {
+            type: Sequelize.STRING,
+            allowNull: true,
+        },
+        secondary_contact_name: {
+            type: Sequelize.STRING,
+            allowNull: true,
+        },
+        secondary_contact_email: {
+            type: Sequelize.STRING,
+            allowNull: true,
+        },
+        secondary_contact_phone: {
+            type: Sequelize.STRING,
+            allowNull: true,
+        },
         status: {
             type: Sequelize.STRING,
             allowNull: true,

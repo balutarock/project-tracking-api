@@ -9,8 +9,6 @@ export default (sequelize, DataTypes) => {
             },
             name: DataTypes.STRING,
             status: DataTypes.STRING,
-            show_application_name: DataTypes.STRING,
-            show_application_type: DataTypes.STRING,
             show_application_url: DataTypes.STRING,
             show_customer: DataTypes.STRING,
             show_due_at: DataTypes.STRING,
@@ -20,7 +18,6 @@ export default (sequelize, DataTypes) => {
             show_server: DataTypes.STRING,
             show_spent_hours: DataTypes.STRING,
             show_started_at: DataTypes.STRING,
-            show_status: DataTypes.STRING,
             show_total_hours: DataTypes.STRING,
         },
         {

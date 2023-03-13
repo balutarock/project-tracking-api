@@ -67,6 +67,8 @@ export default async (req, res, next) => {
                     roleSettings && roleSettings.view_applications),
                 (roleSetting.view_server =
                     roleSettings && roleSettings.view_server),
+                (roleSetting.view_settings =
+                    roleSettings && roleSettings.view_settings),
                 res.send({
                     settings,
                     roleSetting,

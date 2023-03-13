@@ -1,30 +1,18 @@
 export function up(queryInterface, Sequelize) {
-    console.log("Creating server table");
-    return queryInterface.createTable("server", {
+    console.log("Creating attachment_type_relation table");
+    return queryInterface.createTable("attachment_type_relation", {
         id: {
             allowNull: false,
             autoIncrement: true,
             primaryKey: true,
             type: Sequelize.INTEGER,
         },
-        name: {
-            type: Sequelize.STRING,
+        type_id: {
+            type: Sequelize.INTEGER,
             allowNull: true,
         },
-        status: {
-            type: Sequelize.STRING,
-            allowNull: true,
-        },
-        node_version: {
-            type: Sequelize.STRING,
-            allowNull: true,
-        },
-        server_root: {
-            type: Sequelize.STRING,
-            allowNull: true,
-        },
-        server_specification: {
-            type: Sequelize.STRING,
+        allowed_role: {
+            type: Sequelize.INTEGER,
             allowNull: true,
         },
         createdAt: {
@@ -42,6 +30,6 @@ export function up(queryInterface, Sequelize) {
     });
 }
 export function down(queryInterface, Sequelize) {
-    console.log("Dropping server table");
-    return queryInterface.dropTable("server");
+    console.log("Dropping attachment_type_relation table");
+    return queryInterface.dropTable("attachment_type_relation");
 }

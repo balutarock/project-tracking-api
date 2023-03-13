@@ -1,6 +1,6 @@
 export function up(queryInterface, Sequelize) {
-    console.log("Creating application_hosting table");
-    return queryInterface.createTable("application_hosting", {
+    console.log("Creating workflow table");
+    return queryInterface.createTable("workflow", {
         id: {
             allowNull: false,
             autoIncrement: true,
@@ -15,35 +15,11 @@ export function up(queryInterface, Sequelize) {
             type: Sequelize.STRING,
             allowNull: true,
         },
-        type: {
+        users: {
             type: Sequelize.STRING,
             allowNull: true,
         },
-        customer: {
-            type: Sequelize.STRING,
-            allowNull: true,
-        },
-        server: {
-            type: Sequelize.STRING,
-            allowNull: true,
-        },
-        application_url: {
-            type: Sequelize.STRING,
-            allowNull: true,
-        },
-        due_date: {
-            type: Sequelize.STRING,
-            allowNull: true,
-        },
-        git_url: {
-            type: Sequelize.STRING,
-            allowNull: true,
-        },
-        port: {
-            type: Sequelize.STRING,
-            allowNull: true,
-        },
-        started_at: {
+        workflow_for: {
             type: Sequelize.STRING,
             allowNull: true,
         },
@@ -62,6 +38,6 @@ export function up(queryInterface, Sequelize) {
     });
 }
 export function down(queryInterface, Sequelize) {
-    console.log("Dropping application_hosting table");
-    return queryInterface.dropTable("application_hosting");
+    console.log("Dropping workflow table");
+    return queryInterface.dropTable("workflow");
 }

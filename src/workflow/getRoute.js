@@ -1,5 +1,5 @@
 //Service
-import { reminderService } from "./service";
+import { workflowService } from "./service";
 
 // Common
 import { defaultDateFormat } from "../../common/utils";
@@ -15,27 +15,24 @@ export default async (req, res) => {
         where.id = id;
     }
 
-    reminderService
+    workflowService
         .findOne({
             where,
         })
         .then((appDetails) => {
             if (!appDetails) {
-                return res.status(400).send({ message: "Reminder not found" });
+                return res
+                    .status(400)
+                    .send({ message: "Attachment not found" });
             }
 
             const {
                 id,
                 name,
                 status,
-                appId,
-                subject,
-                description,
-                remind_at,
-                cc_email,
-                to_email,
+                users,
+                workflow_for,
                 createdAt,
-                send_slack_notification,
                 updatedAt,
             } = appDetails.get();
 
@@ -43,13 +40,8 @@ export default async (req, res) => {
                 id,
                 name,
                 status,
-                appId,
-                subject,
-                description,
-                remind_at,
-                cc_email,
-                send_slack_notification,
-                to_email,
+                users,
+                workflow_for,
                 createdAt: defaultDateFormat(createdAt),
                 updatedAt: defaultDateFormat(updatedAt),
             };

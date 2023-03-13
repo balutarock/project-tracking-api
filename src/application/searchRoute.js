@@ -83,8 +83,18 @@ export default async (req, res, next) => {
                 data.push({
                     id: applicationData.id,
                     name: applicationData.name,
-                    type: applicationData.applicationType.name,
-                    typeId: applicationData.applicationType.id,
+                    type:
+                        applicationData &&
+                        applicationData.applicationType &&
+                        applicationData.applicationType.name
+                            ? applicationData.applicationType.name
+                            : "",
+                    typeId:
+                        applicationData &&
+                        applicationData.applicationType &&
+                        applicationData.applicationType.id
+                            ? applicationData.applicationType.id
+                            : "",
                     status: applicationData.status,
                     createdAt: defaultDateFormat(applicationData.createdAt),
                     updatedAt: defaultDateFormat(applicationData.updatedAt),

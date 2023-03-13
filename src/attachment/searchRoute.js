@@ -1,6 +1,8 @@
 import { defaultDateFormat } from "../../common/utils";
-import { attachmentService } from "./service";
+import { attachmentService, getAttachmentTypeRelation } from "./service";
+import models from "../../db/models";
 
+const { attachment_type } = models;
 export default async (req, res, next) => {
     let { page, pageSize, search, sort, sortDir, pagination } = req.query;
     // Validate if page is not a number
@@ -48,11 +50,23 @@ export default async (req, res, next) => {
             },
         ];
     }
+
+    // Get type relation for permissions
+    const attachmentTypeRelation = await getAttachmentTypeRelation(
+        req.user.role_id
+    );
+
     where.appId = req.params.appId;
     const query = {
         order: [[sortParam, sortDirParam]],
         where,
         attributes: { exclude: ["deletedAt"] },
+        include: [
+            {
+                model: attachment_type,
+                as: "attachmentTypeData",
+            },
+        ],
     };
 
     if (pagination) {
@@ -71,15 +85,24 @@ export default async (req, res, next) => {
             }
             const data = [];
             await results.rows.forEach(async (attachmentData) => {
-                data.push({
-                    id: attachmentData.id,
-                    appId: attachmentData.appId,
-                    name: attachmentData.name,
-                    type: attachmentData.type,
-                    link: attachmentData.link,
-                    createdAt: defaultDateFormat(attachmentData.createdAt),
-                    updatedAt: defaultDateFormat(attachmentData.updatedAt),
-                });
+                if (attachmentData) {
+                    if (attachmentTypeRelation.includes(attachmentData.type))
+                        data.push({
+                            id: attachmentData.id,
+                            appId: attachmentData.appId,
+                            name: attachmentData.name,
+                            status: attachmentData.status,
+                            typeId: attachmentData.attachmentTypeData.id,
+                            type: attachmentData.attachmentTypeData.name,
+                            link: attachmentData.link,
+                            createdAt: defaultDateFormat(
+                                attachmentData.createdAt
+                            ),
+                            updatedAt: defaultDateFormat(
+                                attachmentData.updatedAt
+                            ),
+                        });
+                }
             });
             res.send({
                 totalCount: results.count,

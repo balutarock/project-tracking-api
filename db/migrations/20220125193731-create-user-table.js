@@ -15,6 +15,10 @@ export function up(queryInterface, Sequelize) {
             type: Sequelize.STRING,
             allowNull: true,
         },
+        slack_id: {
+            type: Sequelize.STRING,
+            allowNull: true,
+        },
         email: {
             type: Sequelize.STRING,
             allowNull: true,

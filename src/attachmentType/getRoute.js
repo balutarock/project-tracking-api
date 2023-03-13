@@ -1,5 +1,5 @@
 //Service
-import { reminderService } from "./service";
+import { attachmentTypeService } from "./service";
 
 // Common
 import { defaultDateFormat } from "../../common/utils";
@@ -15,41 +15,25 @@ export default async (req, res) => {
         where.id = id;
     }
 
-    reminderService
+    attachmentTypeService
         .findOne({
             where,
         })
         .then((appDetails) => {
             if (!appDetails) {
-                return res.status(400).send({ message: "Reminder not found" });
+                return res
+                    .status(400)
+                    .send({ message: "Attachment Type not found" });
             }
 
-            const {
-                id,
-                name,
-                status,
-                appId,
-                subject,
-                description,
-                remind_at,
-                cc_email,
-                to_email,
-                createdAt,
-                send_slack_notification,
-                updatedAt,
-            } = appDetails.get();
+            const { id, name, status, allowed_roles, createdAt, updatedAt } =
+                appDetails.get();
 
             const data = {
                 id,
                 name,
                 status,
-                appId,
-                subject,
-                description,
-                remind_at,
-                cc_email,
-                send_slack_notification,
-                to_email,
+                allowed_roles,
                 createdAt: defaultDateFormat(createdAt),
                 updatedAt: defaultDateFormat(updatedAt),
             };

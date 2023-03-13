@@ -74,10 +74,6 @@ export default async (req, res, next) => {
                     id: applicationTypeData.id,
                     name: applicationTypeData.name,
                     status: applicationTypeData.status,
-                    show_application_name:
-                        applicationTypeData.show_application_name,
-                    show_application_type:
-                        applicationTypeData.show_application_type,
                     show_application_url:
                         applicationTypeData.show_application_url,
                     show_customer: applicationTypeData.show_customer,
@@ -89,7 +85,6 @@ export default async (req, res, next) => {
                     show_server: applicationTypeData.show_server,
                     show_spent_hours: applicationTypeData.show_spent_hours,
                     show_started_at: applicationTypeData.show_started_at,
-                    show_status: applicationTypeData.show_status,
                     show_total_hours: applicationTypeData.show_total_hours,
                     createdAt: defaultDateFormat(applicationTypeData.createdAt),
                     updatedAt: defaultDateFormat(applicationTypeData.updatedAt),

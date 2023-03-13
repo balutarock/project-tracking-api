@@ -25,6 +25,7 @@ export default (sequelize, DataTypes) => {
             view_customer: DataTypes.STRING,
             view_server: DataTypes.STRING,
             view_user: DataTypes.STRING,
+            view_settings: DataTypes.STRING,
         },
         {
             freezeTableName: true,

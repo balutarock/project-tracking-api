@@ -79,6 +79,10 @@ export function up(queryInterface, Sequelize) {
             type: Sequelize.STRING,
             allowNull: true,
         },
+        view_settings: {
+            type: Sequelize.STRING,
+            allowNull: true,
+        },
         createdAt: {
             allowNull: false,
             type: Sequelize.DATE,

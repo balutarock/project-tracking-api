@@ -79,6 +79,8 @@ export default async (req, res, next) => {
                     link: reminderData.link,
                     subject: reminderData.subject,
                     description: reminderData.description,
+                    send_slack_notification:
+                        reminderData.send_slack_notification,
                     remind_at: defaultDateFormat(reminderData.remind_at),
                     cc_email: reminderData.cc_email,
                     to_email: reminderData.to_email,

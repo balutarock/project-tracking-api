@@ -16,7 +16,7 @@ export function up(queryInterface, Sequelize) {
             allowNull: true,
         },
         customer: {
-            type: Sequelize.STRING,
+            type: Sequelize.INTEGER,
             allowNull: true,
         },
         type: {
@@ -24,7 +24,7 @@ export function up(queryInterface, Sequelize) {
             allowNull: true,
         },
         server: {
-            type: Sequelize.STRING,
+            type: Sequelize.INTEGER,
             allowNull: true,
         },
         application_url: {

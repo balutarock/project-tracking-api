@@ -12,6 +12,10 @@ export function up(queryInterface, Sequelize) {
             allowNull: true,
         },
         appId: {
+            type: Sequelize.INTEGER,
+            allowNull: true,
+        },
+        send_slack_notification: {
             type: Sequelize.STRING,
             allowNull: true,
         },

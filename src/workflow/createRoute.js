@@ -1,21 +1,20 @@
 import { createActivity } from "../activities/createActivity";
-import { attachmentService } from "./service";
+import { workflowService } from "./service";
 
 export default async (req, res, next) => {
     const data = req.body;
     try {
-        const createData = attachmentService.toDbObject(data);
-        createData.appId = data.appId;
-        await attachmentService.create(createData).then((response) => {
+        const createData = workflowService.toDbObject(data);
+        await workflowService.create(createData).then((response) => {
             createActivity(
                 req,
-                "Attachment",
+                "Workflow",
                 "Created",
                 response.name,
                 response.id
             );
         });
-        res.status(200).send({ message: "Attachment Created Successfully" });
+        res.status(200).send({ message: "Workflow Created Successfully" });
     } catch (err) {
         res.status(400).send(err);
         next(err);

@@ -86,6 +86,7 @@ export async function uploadBase64File(base64, newPath, callback, options) {
             extension
         )}${extension}`;
 
+        console.log("params in s3 ======>", params);
         s3.putObject(params, (err) => {
             if (err) {
                 return callback(err);
@@ -94,6 +95,6 @@ export async function uploadBase64File(base64, newPath, callback, options) {
             return callback();
         });
     } catch (error) {
-        console.log(error);
+        console.log("error in updating s3 file =====>", error);
     }
 }

@@ -37,13 +37,28 @@ export const getUserDetailByEmail = async (email) => {
     return userDetails;
 };
 export const getUserDetailById = async (id) => {
-    const userDetails = await user.findOne({
+    const userDetails = await users.findOne({
         where: { id: id },
     });
     if (!userDetails) {
         return null;
     }
     return userDetails;
+};
+export const getUserSlackIdsById = async (id) => {
+    let userData = {};
+    const userDetails = await users.findOne({
+        where: { id: id },
+    });
+    if (!userDetails) {
+        return null;
+    }
+    if (userDetails) {
+        userData.id = userDetails && userDetails.id ? userDetails.id : "";
+        userData.slackId =
+            userDetails && userDetails.slack_id ? userDetails.slack_id : "";
+    }
+    return userData;
 };
 export const isUserExist = async (roll_no, reg_no) => {
     if (!roll_no) {
@@ -62,6 +77,7 @@ export default {
     isUserExist,
     isUserExistsByEmail,
     getUserDetailByEmail,
+    getUserSlackIdsById,
     getUserDetailById,
 };
 

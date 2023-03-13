@@ -11,12 +11,16 @@ export function up(queryInterface, Sequelize) {
             type: Sequelize.STRING,
             allowNull: true,
         },
-        appId: {
+        status: {
             type: Sequelize.STRING,
             allowNull: true,
         },
+        appId: {
+            type: Sequelize.INTEGER,
+            allowNull: true,
+        },
         type: {
-            type: Sequelize.STRING,
+            type: Sequelize.INTEGER,
             allowNull: true,
         },
         link: {

@@ -10,6 +10,7 @@ export default (sequelize, DataTypes) => {
             first_name: DataTypes.STRING,
             last_name: DataTypes.STRING,
             email: DataTypes.STRING,
+            slack_id: DataTypes.STRING,
             password: DataTypes.STRING,
             status: DataTypes.STRING,
             gender: DataTypes.STRING,

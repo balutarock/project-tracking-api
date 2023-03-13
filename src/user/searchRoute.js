@@ -84,6 +84,8 @@ export default async (req, res, next) => {
                     id: userData.id,
                     first_name: userData.first_name,
                     last_name: userData.last_name,
+                    slack_id: userData.slack_id,
+                    roleId: userData.role_id,
                     role:
                         userData &&
                         userData.roleData &&

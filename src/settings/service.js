@@ -170,7 +170,7 @@ export const uploadImage = (image, mediaName, settingDetails, callback) => {
             { public: true }
         );
     } catch (err) {
-        console.log(err);
+        console.log("err in uploadImage function ----->", err);
     }
 };
 

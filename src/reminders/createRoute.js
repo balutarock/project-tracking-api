@@ -16,7 +16,7 @@ export default async (req, res, next) => {
                 response.id
             );
         });
-        // postMessage("<@U04M6BQ0LEN> Hi gopi");
+        // postMessage("<!channel> Hi gopi");
         res.status(200).send({ message: "Reminder Created Successfully" });
     } catch (err) {
         res.status(400).send(err);

@@ -91,6 +91,7 @@ export default async (req, res, next) => {
                     view_customer: roleData.view_customer,
                     view_server: roleData.view_server,
                     view_user: roleData.view_user,
+                    view_settings: roleData.view_settings,
                     createdAt: defaultDateFormat(roleData.createdAt),
                     updatedAt: defaultDateFormat(roleData.updatedAt),
                 });

@@ -1,8 +1,5 @@
 import { defaultDateFormat } from "../../common/utils";
-import { activityService } from "./service";
-import models from "../../db/models";
-
-const { users } = models;
+import { attachmentTypeService } from "./service";
 
 export default async (req, res, next) => {
     let { page, pageSize, search, sort, sortDir, pagination } = req.query;
@@ -25,12 +22,12 @@ export default async (req, res, next) => {
         updatedAt: "updatedAt",
     };
 
-    const sortParam = sort || "createdAt";
+    const sortParam = sort || "name";
     // Validate sortable fields is present in sort param
     if (!Object.keys(sortableFields).includes(sortParam)) {
-        return res
-            .status(400)
-            .send({ message: `Unable to sort role by ${sortParam}` });
+        return res.status(400).send({
+            message: `Unable to sort attachment type by ${sortParam}`,
+        });
     }
 
     const sortDirParam = sortDir ? sortDir.toUpperCase() : "ASC";
@@ -51,17 +48,10 @@ export default async (req, res, next) => {
             },
         ];
     }
-
     const query = {
         order: [[sortParam, sortDirParam]],
         where,
         attributes: { exclude: ["deletedAt"] },
-        include: [
-            {
-                model: users,
-                as: "userData",
-            },
-        ],
     };
 
     if (pagination) {
@@ -71,7 +61,7 @@ export default async (req, res, next) => {
         }
     }
     // Get list and count
-    activityService
+    attachmentTypeService
         .findAndCount(query)
         .then(async (results) => {
             // Return null
@@ -79,20 +69,14 @@ export default async (req, res, next) => {
                 return res.status(200).send(null);
             }
             const data = [];
-            await results.rows.forEach(async (activityData) => {
+            await results.rows.forEach(async (attachmentTypeData) => {
                 data.push({
-                    id: activityData.id,
-                    name: activityData.name,
-                    ref_id: activityData.reference_id,
-                    user:
-                        activityData &&
-                        activityData.userData &&
-                        activityData.userData.first_name
-                            ? activityData.userData.first_name
-                            : "System",
-                    notes: activityData.notes,
-                    createdAt: defaultDateFormat(activityData.createdAt),
-                    updatedAt: defaultDateFormat(activityData.updatedAt),
+                    id: attachmentTypeData.id,
+                    name: attachmentTypeData.name,
+                    status: attachmentTypeData.status,
+                    allowed_roles: attachmentTypeData.allowed_roles,
+                    createdAt: defaultDateFormat(attachmentTypeData.createdAt),
+                    updatedAt: defaultDateFormat(attachmentTypeData.updatedAt),
                 });
             });
             res.send({

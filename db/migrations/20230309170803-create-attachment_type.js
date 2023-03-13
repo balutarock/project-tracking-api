@@ -1,6 +1,6 @@
 export function up(queryInterface, Sequelize) {
-    console.log("Creating application_products table");
-    return queryInterface.createTable("application_products", {
+    console.log("Creating attachment_type table");
+    return queryInterface.createTable("attachment_type", {
         id: {
             allowNull: false,
             autoIncrement: true,
@@ -15,15 +15,7 @@ export function up(queryInterface, Sequelize) {
             type: Sequelize.STRING,
             allowNull: true,
         },
-        type: {
-            type: Sequelize.STRING,
-            allowNull: true,
-        },
-        customer: {
-            type: Sequelize.STRING,
-            allowNull: true,
-        },
-        started_at: {
+        allowed_roles: {
             type: Sequelize.STRING,
             allowNull: true,
         },
@@ -42,6 +34,6 @@ export function up(queryInterface, Sequelize) {
     });
 }
 export function down(queryInterface, Sequelize) {
-    console.log("Dropping application_products table");
-    return queryInterface.dropTable("application_products");
+    console.log("Dropping attachment_type table");
+    return queryInterface.dropTable("attachment_type");
 }

@@ -136,9 +136,7 @@ module.exports = {
             return null;
         }
 
-        return momentTime(date)
-            .tz(timeZone)
-            .format(format);
+        return momentTime(date).tz(timeZone).format(format);
     },
 
     /**
@@ -147,7 +145,7 @@ module.exports = {
      * @param date
      * @returns {null|*}
      */
-    formatDateTime: date => {
+    formatDateTime: (date) => {
         if (!date) {
             return null;
         }
@@ -161,7 +159,7 @@ module.exports = {
      * @param date
      * @returns {null|*}
      */
-    shortDate: date => {
+    shortDate: (date) => {
         if (!date) {
             return null;
         }
@@ -175,7 +173,7 @@ module.exports = {
      * @param date
      * @returns {null|*}
      */
-    shortDateAndTime: date => {
+    shortDateAndTime: (date) => {
         if (!date) {
             return null;
         }
@@ -188,7 +186,7 @@ module.exports = {
      *
      * @param date
      */
-    ago: date => moment(date).fromNow(),
+    ago: (date) => moment(date).fromNow(),
 
     /**
      * Get SQl Current Date Time

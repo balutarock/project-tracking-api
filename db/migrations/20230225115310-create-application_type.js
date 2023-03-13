@@ -11,15 +11,7 @@ export function up(queryInterface, Sequelize) {
             type: Sequelize.STRING,
             allowNull: true,
         },
-        show_application_name: {
-            type: Sequelize.STRING,
-            allowNull: true,
-        },
         status: {
-            type: Sequelize.STRING,
-            allowNull: true,
-        },
-        show_application_type: {
             type: Sequelize.STRING,
             allowNull: true,
         },
@@ -56,10 +48,6 @@ export function up(queryInterface, Sequelize) {
             allowNull: true,
         },
         show_started_at: {
-            type: Sequelize.STRING,
-            allowNull: true,
-        },
-        show_status: {
             type: Sequelize.STRING,
             allowNull: true,
         },

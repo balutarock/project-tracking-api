@@ -7,6 +7,7 @@ const {
     APP_URL,
     PORT,
     DATABASE_URL,
+    APP_FRONTEND_URL,
     DEFAULT_API_KEY,
     DEFAULT_SUPER_ADMIN_EMAIL,
     DEFAULT_SUPER_ADMIN_PASSWORD,
@@ -19,6 +20,7 @@ const {
 module.exports = {
     environment: NODE_ENV || "production",
     baseUrl: BASE_URL || "",
+    appFrontendUrl: APP_FRONTEND_URL || "",
     reactAppBaseUrl: REACT_APP_URL || "",
     corsUrl: CORS_URL ? CORS_URL.split(",") : "",
     port: PORT || 80,

@@ -20,6 +20,8 @@ import reminderRoute from "./src/reminders/route";
 import applicationType from "./src/applicationType/route";
 import { scheduler } from "./src/reminderJob/reminder";
 import applicationRoute from "./src/application/route";
+import workflowRoute from "./src/workflow/route";
+import attachmentTypeRoute from "./src/attachmentType/route";
 
 dotenv.config();
 
@@ -79,6 +81,12 @@ app.use(`/v1/applicationType`, applicationType);
 
 //User Email Routs
 app.use(`/v1/userEmail`, userEmailRoute);
+
+//Workflow Settings Route
+app.use(`/v1/workflow`, workflowRoute);
+
+//Attachment Type Route
+app.use(`/v1/attachmentType`, attachmentTypeRoute);
 
 export default app;
 

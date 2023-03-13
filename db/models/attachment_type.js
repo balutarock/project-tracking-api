@@ -1,6 +1,6 @@
 export default (sequelize, DataTypes) => {
-    const application_products = sequelize.define(
-        "application_products",
+    const attachment_type = sequelize.define(
+        "attachment_type",
         {
             id: {
                 type: DataTypes.INTEGER,
@@ -9,9 +9,7 @@ export default (sequelize, DataTypes) => {
             },
             name: DataTypes.STRING,
             status: DataTypes.STRING,
-            customer: DataTypes.STRING,
-            type: DataTypes.STRING,
-            started_at: DataTypes.STRING,
+            allowed_roles: DataTypes.STRING,
         },
         {
             freezeTableName: true,
@@ -19,5 +17,5 @@ export default (sequelize, DataTypes) => {
         }
     );
 
-    return application_products;
+    return attachment_type;
 };
