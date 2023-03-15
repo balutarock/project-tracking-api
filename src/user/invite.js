@@ -1,4 +1,4 @@
-import { baseUrl, reactAppBaseUrl } from "../../config";
+import { appFrontendUrl, baseUrl, reactAppBaseUrl } from "../../config";
 import createActivity from "../activities/createActivity";
 import { getRoleNameById } from "../role/service";
 import { SETTINGS_SENDGRID_API_KEY } from "../settings/Constant";
@@ -12,7 +12,7 @@ export const inviteUserByEmail = async (req, res, data) => {
         const role = await getRoleNameById(data && data.role_id);
         const name = data.first_name;
         const token = Math.floor(Date.now());
-        const signUpLink = `${reactAppBaseUrl}/sign-up/${token}&${email}&${data.role_id}`;
+        const signUpLink = `${appFrontendUrl}/sign-up/${token}&${email}&${data.role_id}`;
         const updateData = {
             token: token,
             status: "invited",

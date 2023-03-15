@@ -132,7 +132,7 @@ export const saveImage = async (name, image) => {
                         value: mediaName,
                     };
                     //Upload Image
-                    await uploadImage(image, mediaName, settingDetails);
+                    await uploadImage(image, mediaName);
 
                     settingService.update(updateData, {
                         where: { id: settingDetails.id },
@@ -145,7 +145,7 @@ export const saveImage = async (name, image) => {
                                 lower: true,
                             })}.${imageType}`;
                             //Upload Image
-                            await uploadImage(image, mediaName, settingDetails);
+                            await uploadImage(image, mediaName);
                         });
             });
         return true;
@@ -154,10 +154,10 @@ export const saveImage = async (name, image) => {
     }
 };
 
-export const uploadImage = (image, mediaName, settingDetails, callback) => {
+export const uploadImage = (image, mediaName, callback) => {
     try {
         if (!image) return callback(null);
-        const mediaPath = `${MEDIA_PATH_SETTING}/${mediaName}`;
+        const mediaPath = `contract-management-internal/${MEDIA_PATH_SETTING}/${mediaName}`;
 
         uploadBase64File(
             image,

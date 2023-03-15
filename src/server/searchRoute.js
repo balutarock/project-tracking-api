@@ -76,6 +76,9 @@ export default async (req, res, next) => {
                     name: serverData.name,
                     email: serverData.email,
                     status: serverData.status,
+                    node_version: serverData.node_version,
+                    server_root: serverData.server_root,
+                    server_specification: serverData.server_specification,
                     createdAt: defaultDateFormat(serverData.createdAt),
                     updatedAt: defaultDateFormat(serverData.updatedAt),
                 });

@@ -2,15 +2,14 @@ import { reminderService } from "./service";
 
 export default async (req, res, next) => {
     const data = req.body;
-    const appId = data.appId;
-    if (!appId) {
+    const id = data.id;
+    if (!id) {
         return res.status(400).send({ message: "Reminder Id is required" });
     }
-
     try {
         const updateData = reminderService.toDbObject(data);
         await reminderService.update(updateData, {
-            where: { id: appId },
+            where: { id: id },
         });
         res.status(200).send({ message: "Reminder Updated Successfully" });
     } catch (err) {

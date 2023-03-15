@@ -44,7 +44,7 @@ export async function getS3ObjectUrl(filePath) {
             awsConstant.AWS_MEDIA_BASE_URL
         );
 
-        return `${mediaBaseUrl}/${MEDIA_PATH_SETTING}/${filePath}`;
+        return `${mediaBaseUrl}/contract-management-internal/${MEDIA_PATH_SETTING}/${filePath}`;
     } catch (error) {
         console.log(error);
     }
@@ -87,13 +87,15 @@ export async function uploadBase64File(base64, newPath, callback, options) {
         )}${extension}`;
 
         console.log("params in s3 ======>", params);
-        s3.putObject(params, (err) => {
-            if (err) {
-                return callback(err);
-            }
+        // s3.putObject(params, (err) => {
+        //     if (err) {
+        //         return callback(err);
+        //     }
 
-            return callback();
-        });
+        //     return callback();
+        await s3.upload(params).promise();
+
+        // });
     } catch (error) {
         console.log("error in updating s3 file =====>", error);
     }

@@ -1,16 +1,16 @@
-import { attachmentService } from "./service";
+import { workflowService } from "./service";
 
 export default async (req, res, next) => {
     const data = req.body;
-    const appId = data.appId;
-    if (!appId) {
+    const id = data.id;
+    if (!id) {
         return res.status(400).send({ message: "Attachment Id is required" });
     }
 
     try {
-        const updateData = attachmentService.toDbObject(data);
-        await attachmentService.update(updateData, {
-            where: { id: appId },
+        const updateData = workflowService.toDbObject(data);
+        await workflowService.update(updateData, {
+            where: { id: id },
         });
         res.status(200).send({ message: "Attachment Updated Successfully" });
     } catch (err) {

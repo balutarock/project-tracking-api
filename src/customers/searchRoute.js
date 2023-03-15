@@ -71,11 +71,20 @@ export default async (req, res, next) => {
             }
             const data = [];
             await results.rows.forEach(async (customerData) => {
+                console.log("customerData ------------>", customerData);
                 data.push({
                     id: customerData.id,
                     name: customerData.name,
                     email: customerData.email,
                     status: customerData.status,
+                    primary_contact_name: customerData.primary_contact_name,
+                    primary_contact_email: customerData.primary_contact_email,
+                    primary_contact_phone: customerData.primary_contact_phone,
+                    secondary_contact_name: customerData.secondary_contact_name,
+                    secondary_contact_email:
+                        customerData.secondary_contact_email,
+                    secondary_contact_phone:
+                        customerData.secondary_contact_phone,
                     createdAt: defaultDateFormat(customerData.createdAt),
                     updatedAt: defaultDateFormat(customerData.updatedAt),
                 });
