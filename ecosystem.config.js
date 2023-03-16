@@ -27,7 +27,7 @@ module.exports = {
         production: {
             user: "root",
             host: "saasly-tracker-api.spritle.com",
-            ref: "origin/master",
+            ref: "origin/main",
             repo: "git@code.spritle.com:saasly/saasly-tracker-api.git",
             path: "/root/projects/saasly-tracker-api",
             "post-deploy":
