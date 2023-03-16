@@ -28,7 +28,7 @@ module.exports = {
             user: "root",
             host: "saasly-tracker-api.spritle.com",
             ref: "origin/master",
-            repo: "git@github.com:Saasly-in/saasly-tracker-api.git",
+            repo: "git@code.spritle.com:saasly/saasly-tracker-api.git",
             path: "/root/projects/saasly-tracker-api",
             "post-deploy":
                 "npm install && pm2 startOrRestart ecosystem.config.js --env production",
