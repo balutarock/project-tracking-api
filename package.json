@@ -4,7 +4,7 @@
   "description": "Saasly Tracker API",
   "private": true,
   "engines": {
-    "node": "16.15.1",
+    "node": "16.14.0",
     "npm": "8.11.0"
   },
   "dependencies": {
