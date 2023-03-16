@@ -31,7 +31,7 @@ module.exports = {
             repo: "git@code.spritle.com:saasly/saasly-tracker-api.git",
             path: "/root/projects/saasly-tracker-api",
             "post-deploy":
-                "npm install && pm2 startOrRestart ecosystem.config.js --env production",
+                "npm install && pm2 startOrRestart 'npm start' ecosystem.config.js --env production",
         },
     },
 };
