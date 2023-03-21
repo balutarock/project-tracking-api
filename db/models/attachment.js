@@ -11,6 +11,7 @@ export default (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             status: DataTypes.STRING,
             link: DataTypes.STRING,
+            assignee: DataTypes.INTEGER,
             appId: DataTypes.INTEGER,
         },
         {
@@ -23,7 +24,10 @@ export default (sequelize, DataTypes) => {
             as: "attachmentTypeData",
             foreignKey: "type",
         });
+        attachment.belongsTo(models.users, {
+            as: "userData",
+            foreignKey: "assignee",
+        });
     };
-
     return attachment;
 };

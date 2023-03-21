@@ -1,13 +1,17 @@
 export function up(queryInterface, Sequelize) {
-    console.log("Creating attachment table");
-    return queryInterface.createTable("attachment", {
+    console.log("Creating tickets table");
+    return queryInterface.createTable("tickets", {
         id: {
             allowNull: false,
             autoIncrement: true,
             primaryKey: true,
             type: Sequelize.INTEGER,
         },
-        name: {
+        summary: {
+            type: Sequelize.STRING,
+            allowNull: true,
+        },
+        project: {
             type: Sequelize.STRING,
             allowNull: true,
         },
@@ -15,20 +19,24 @@ export function up(queryInterface, Sequelize) {
             type: Sequelize.STRING,
             allowNull: true,
         },
-        appId: {
-            type: Sequelize.INTEGER,
-            allowNull: true,
-        },
-        type: {
-            type: Sequelize.INTEGER,
-            allowNull: true,
-        },
-        link: {
+        eta: {
             type: Sequelize.STRING,
+            allowNull: true,
+        },
+        reporter: {
+            type: Sequelize.INTEGER,
             allowNull: true,
         },
         assignee: {
             type: Sequelize.INTEGER,
+            allowNull: true,
+        },
+        description: {
+            type: Sequelize.TEXT,
+            allowNull: true,
+        },
+        expected_result: {
+            type: Sequelize.TEXT,
             allowNull: true,
         },
         createdAt: {
@@ -46,6 +54,6 @@ export function up(queryInterface, Sequelize) {
     });
 }
 export function down(queryInterface, Sequelize) {
-    console.log("Dropping attachment table");
-    return queryInterface.dropTable("attachment");
+    console.log("Dropping tickets table");
+    return queryInterface.dropTable("tickets");
 }

@@ -2,7 +2,7 @@ import { defaultDateFormat } from "../../common/utils";
 import { attachmentService, getAttachmentTypeRelation } from "./service";
 import models from "../../db/models";
 
-const { attachment_type } = models;
+const { attachment_type, users } = models;
 export default async (req, res, next) => {
     let { page, pageSize, search, sort, sortDir, pagination } = req.query;
     // Validate if page is not a number
@@ -66,6 +66,10 @@ export default async (req, res, next) => {
                 model: attachment_type,
                 as: "attachmentTypeData",
             },
+            {
+                model: users,
+                as: "userData",
+            },
         ],
     };
 
@@ -92,6 +96,19 @@ export default async (req, res, next) => {
                             appId: attachmentData.appId,
                             name: attachmentData.name,
                             status: attachmentData.status,
+                            assignee: attachmentData.assignee,
+                            assigneeName:
+                                attachmentData && attachmentData.userData
+                                    ? `${
+                                          attachmentData &&
+                                          attachmentData.userData &&
+                                          attachmentData.userData.first_name
+                                      } ${
+                                          attachmentData &&
+                                          attachmentData.userData &&
+                                          attachmentData.userData.last_name
+                                      }`
+                                    : "Unassigned",
                             typeId: attachmentData.attachmentTypeData.id,
                             type: attachmentData.attachmentTypeData.name,
                             link: attachmentData.link,

@@ -22,6 +22,8 @@ import { scheduler } from "./src/reminderJob/reminder";
 import applicationRoute from "./src/application/route";
 import workflowRoute from "./src/workflow/route";
 import attachmentTypeRoute from "./src/attachmentType/route";
+import ticketsRoute from "./src/tickets/route";
+import dashboardRoute from "./src/dashboard/route";
 
 dotenv.config();
 
@@ -87,6 +89,12 @@ app.use(`/v1/workflow`, workflowRoute);
 
 //Attachment Type Route
 app.use(`/v1/attachmentType`, attachmentTypeRoute);
+
+// Dashboard routes
+app.use(`/v1/dashboard`, dashboardRoute);
+
+// Tickets Routes
+app.use(`/v1/tickets`, ticketsRoute);
 
 export default app;
 
